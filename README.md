@@ -30,7 +30,7 @@
 
 ## 🚨 Tutorial
 
-This repository contains the code corresponding to an in-depth tutorial available on our YouTube channel, <a href="https://www.youtube.com/@javascriptmastery/videos" target="_blank"><b>JavaScript Mastery</b></a>. 
+This repository contains the code corresponding to an in-depth tutorial available on our YouTube channel, <a href="https://www.youtube.com/@javascriptmastery/videos" target="_blank"><b>JavaScript Mastery</b></a>.
 
 If you prefer visual learning, this is the perfect resource for you. Follow our tutorial to learn how to build projects like these step-by-step in a beginner-friendly manner!
 
@@ -71,7 +71,7 @@ If you're getting started and need assistance or face any bugs, join our active 
 
 👉 **Responsive Website**: Develop a fully responsive website to ensure optimal user experience across various devices, from desktops to smartphones
 
-and many more, including code architecture and reusability 
+and many more, including code architecture and reusability
 
 ## <a name="quick-start">🤸 Quick Start</a>
 
@@ -113,7 +113,7 @@ GOOGLE_CLIENT_SECRET=
 MONGODB_URI=
 ```
 
-Replace the placeholder values with your actual credentials. You can obtain these credentials by signing up on these corresponding websites from [Google Cloud Console](https://console.cloud.google.com/welcome?rapt=AEjHL4MBaLLneW6OfAHf_zgms1eWZFw1wdy0_KIC4uh1nEqh2m4ojOvrXNlzJ4h7CZTkpiWgcsoHbUvS-FMdCP7WIkaVlPAeU7cnVR6Y0wJHeLMOtU6KAzA&project=promptopia-385410), [Cryptpool](https://www.cryptool.org/en/cto/openssl) (for random Auth Secret), and [MongoDB](https://www.mongodb.com/). 
+Replace the placeholder values with your actual credentials. You can obtain these credentials by signing up on these corresponding websites from [Google Cloud Console](https://console.cloud.google.com/welcome?rapt=AEjHL4MBaLLneW6OfAHf_zgms1eWZFw1wdy0_KIC4uh1nEqh2m4ojOvrXNlzJ4h7CZTkpiWgcsoHbUvS-FMdCP7WIkaVlPAeU7cnVR6Y0wJHeLMOtU6KAzA&project=snippet-prompt-385410), [Cryptpool](https://www.cryptool.org/en/cto/openssl) (for random Auth Secret), and [MongoDB](https://www.mongodb.com/).
 
 **Running the Project**
 
@@ -180,8 +180,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
       at 27% 37%,
       hsla(215, 98%, 61%, 1) 0px,
       transparent 0%
-    ),
-    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
+    ), radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
     radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
     radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
     radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
@@ -326,55 +325,54 @@ import Prompt from "@models/prompt";
 import { connectToDB } from "@utils/database";
 
 export const GET = async (request, { params }) => {
-    try {
-        await connectToDB()
+  try {
+    await connectToDB();
 
-        const prompt = await Prompt.findById(params.id).populate("creator")
-        if (!prompt) return new Response("Prompt Not Found", { status: 404 });
+    const prompt = await Prompt.findById(params.id).populate("creator");
+    if (!prompt) return new Response("Prompt Not Found", { status: 404 });
 
-        return new Response(JSON.stringify(prompt), { status: 200 })
-
-    } catch (error) {
-        return new Response("Internal Server Error", { status: 500 });
-    }
-}
+    return new Response(JSON.stringify(prompt), { status: 200 });
+  } catch (error) {
+    return new Response("Internal Server Error", { status: 500 });
+  }
+};
 
 export const PATCH = async (request, { params }) => {
-    const { prompt, tag } = await request.json();
+  const { prompt, tag } = await request.json();
 
-    try {
-        await connectToDB();
+  try {
+    await connectToDB();
 
-        // Find the existing prompt by ID
-        const existingPrompt = await Prompt.findById(params.id);
+    // Find the existing prompt by ID
+    const existingPrompt = await Prompt.findById(params.id);
 
-        if (!existingPrompt) {
-            return new Response("Prompt not found", { status: 404 });
-        }
-
-        // Update the prompt with new data
-        existingPrompt.prompt = prompt;
-        existingPrompt.tag = tag;
-
-        await existingPrompt.save();
-
-        return new Response("Successfully updated the Prompts", { status: 200 });
-    } catch (error) {
-        return new Response("Error Updating Prompt", { status: 500 });
+    if (!existingPrompt) {
+      return new Response("Prompt not found", { status: 404 });
     }
+
+    // Update the prompt with new data
+    existingPrompt.prompt = prompt;
+    existingPrompt.tag = tag;
+
+    await existingPrompt.save();
+
+    return new Response("Successfully updated the Prompts", { status: 200 });
+  } catch (error) {
+    return new Response("Error Updating Prompt", { status: 500 });
+  }
 };
 
 export const DELETE = async (request, { params }) => {
-    try {
-        await connectToDB();
+  try {
+    await connectToDB();
 
-        // Find the prompt by ID and remove it
-        await Prompt.findByIdAndRemove(params.id);
+    // Find the prompt by ID and remove it
+    await Prompt.findByIdAndRemove(params.id);
 
-        return new Response("Prompt deleted successfully", { status: 200 });
-    } catch (error) {
-        return new Response("Error deleting prompt", { status: 500 });
-    }
+    return new Response("Prompt deleted successfully", { status: 200 });
+  } catch (error) {
+    return new Response("Error deleting prompt", { status: 500 });
+  }
 };
 ```
 
@@ -387,23 +385,23 @@ export const DELETE = async (request, { params }) => {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        satoshi: ['Satoshi', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
+        satoshi: ["Satoshi", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
       colors: {
-        'primary-orange': '#FF5722',
-      }
+        "primary-orange": "#FF5722",
+      },
     },
   },
   plugins: [],
-}
+};
 ```
 
 </details>
